@@ -9,11 +9,17 @@ var puerto = process.env.PORT || 3000;
 var APP_R = process.env.APP_R || 'http://localhost:4200';
 
 // Middleware CORS
-app.use(cors({
-    origin: APP_R,
-    methods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
-}));
+app.use(cors(opciones));
+
+var opciones = {
+    origin: (origin, callback) => {
+        if (APP_R.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('No permitido por el CORS'))
+        }
+    }
+};
 
 // Body Parser desde Express (MiddleWare)
 app.use(express.urlencoded({ extended: false }));
