@@ -5,8 +5,8 @@ var mongoose = require('mongoose');
 
 // INICIALIZAR VARIABLES
 var app = express();
-var puerto = process.env.PORT || 3000;
-var APP_R = process.env.APP_R || 'http://localhost:4200';
+var puerto = process.env.PORT;
+var APP_R = process.env.APP_R;
 
 // Middleware CORS
 app.use(cors(opciones));
@@ -15,7 +15,9 @@ var opciones = {
     origin: (origin, callback) => {
         if (APP_R.indexOf(origin) !== -1) {
             callback(null, true);
+
         } else {
+
             callback(new Error('No permitido por el CORS'))
         }
     }
@@ -34,9 +36,9 @@ var correoRoutes = require('./routes/correo');
 
 // CONEXIÓN A BASE DE DATOS
 mongoose.connection.openUri(process.env.URLDB, {
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-        useCreateIndex: true
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true
     })
     .then(() => {
         console.log('Base de Datos: \x1b[32m%s\x1b[0,', 'online');

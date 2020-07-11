@@ -11,7 +11,7 @@ var Encuesta = require('../models/encuesta');
 
 
 /* OBTIENE TODAS LAS ENCUESTAS DE LA EMPRESA EN TURNO O TODAS SI ES ADMINISTRADOR */
-app.get('/', mdAutenticar.verificaToken, (req, res, next) => {
+app.get('/', mdAutenticar.verificaToken, (req, res) => {
 
    var codigo = req.usuario.empresa;
    var role = req.usuario.role;
@@ -120,6 +120,35 @@ app.post('/', (req, res) => {
       return res.status(201).json({
          ok: true,
          encuesta: ecuestaGuardada,
+      });   
+   });
+});
+
+
+/* ELIMINAR ENCUESTAS SI NO SON DE RIESGO -función de administrador- */
+app.delete('/', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, res)  => {
+
+   Encuesta.deleteMany({'$and': [{'secc2Riesgo': 'false'}, {'secc3Riesgo': 'false'}]}, (err, borradas) => {
+      if (err) {
+         return res.status(500).json({
+            ok: false,
+            mensaje: 'Error al borrar encuestas',
+            errors: err
+         });
+      }
+
+      if ( !borradas ) {
+         return res.status(400).json({
+            ok: false,
+            mensaje: 'No existen encuestas con esas características',
+            errors: { message: 'No se encontraron encuestas con ambos parámetros' }
+         });
+      }
+
+      return res.status(200).json({
+         ok: true,
+         encuesta: borradas,
+         borra: req.usuario
       });   
    });
 });

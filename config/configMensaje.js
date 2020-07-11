@@ -21,10 +21,14 @@ var mailOptions = {
    html: `${correo.mensaje}`
    };
 
-transporter.sendMail(mailOptions, (err, info) => {
- if (err)
- console.log(err)
- else
- console.log(info);
- });
+   transporter.sendMail(mailOptions, (err, info) => {
+
+      if (err) {
+         console.log(err);
+
+      } else {
+    
+         console.log(info);
+      }
+   });
 }

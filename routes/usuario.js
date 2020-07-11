@@ -29,8 +29,8 @@ app.get('/', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, res
 
          return res.status(200).json({
             ok: true,
+            total: conteo,
             usuarios: usuarios,
-            total: conteo, // Muestra el total de registros
             errors: err
          });
       });
@@ -38,7 +38,7 @@ app.get('/', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, res
 });
 
 /* OBTENER UN USUARIO POR EMPRESA -función de administrador- */
-app.get('/:empresa', (req, res) => {
+app.get('/:empresa', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, res) => {
    
    var empresa = req.params.empresa;
 
@@ -64,14 +64,14 @@ app.get('/:empresa', (req, res) => {
 
          return res.status(200).json({
             ok: true,
-            usuario: usuario
+            usuario: usuario,
          });
       });
    }
 );
 
 /* CREAR UN NUEVO USUARIO -función de administrador- */
-app.post('/', (req, res) => {
+app.post('/', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, res) => {
 
    var body = req.body;
    
@@ -101,7 +101,7 @@ app.post('/', (req, res) => {
 });
 
 /* ACTUALIZAR USUARIO POR ID -función de administrador- */
-app.put('/:id', (req, res) => {
+app.put('/:id', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, res) => {
    
    var id = req.params.id;
    var body = req.body;
@@ -145,36 +145,6 @@ app.put('/:id', (req, res) => {
             usuario: usuarioGuardado,
          });      
       });
-   });
-});
-
-/* ELIMINAR USUARIO SI NO ES DE RIESGO -función de administrador- */
-app.delete('/:id', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, res)  => {
-
-   var id = req.params.id;
-
-   Usuario.findByIdAndRemove( id, (err, usuarioBorrado) => {
-      if (err) {
-         return res.status(500).json({
-            ok: false,
-            mensaje: 'Error al borrar usuario',
-            errors: err
-         });
-      }
-
-      if ( !usuarioBorrado ) {
-         return res.status(400).json({
-            ok: false,
-            mensaje: 'No existe un usuario con ese id',
-            errors: { message: 'No existe un usuario con ese id' }
-         });
-      }
-
-      return res.status(200).json({
-         ok: true,
-         usuario: usuarioBorrado,
-         borra: req.usuario
-      });   
    });
 });
 

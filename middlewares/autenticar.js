@@ -21,9 +21,7 @@ exports.verificaToken = function(req, res, next) {
       }
    
       req.usuario = decoded.usuario;
-      
       next();
-
    });
 };
 
@@ -35,6 +33,7 @@ exports.verificaAdmin = function(req, res, next) {
    if (usuario.role === 'ADMIN_ROLE') {
       next();
       return;
+
    } else {
 
       return res.status(401).json({
@@ -42,7 +41,6 @@ exports.verificaAdmin = function(req, res, next) {
          mensaje: 'Token incorrecto',
          errors: { message: 'No tiene permisos para ejecutar esta acción'}
       });
-
    }
 };
    

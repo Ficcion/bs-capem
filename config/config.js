@@ -1,7 +1,7 @@
-module.exports.SEED = process.env.SEMILLA || 'uso-en-modo-local';
+module.exports.SEED = process.env.SEMILLA;
 
-module.exports.DE = process.env.REMITENTE || 'pruebaswapp19@gmail.com';
-module.exports.CONTRA = process.env.CONTRA || '12345678Kinich';
+module.exports.DE = process.env.REMITENTE;
+module.exports.CONTRA = process.env.CONTRA;
 
 /* ENTORNO */
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
