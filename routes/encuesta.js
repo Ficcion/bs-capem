@@ -128,7 +128,7 @@ app.post('/', (req, res) => {
 /* ELIMINAR ENCUESTAS SI NO SON DE RIESGO -función de administrador- */
 app.delete('/', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, res)  => {
 
-   Encuesta.deleteMany({'$and': [{'secc2Riesgo': 'false'}, {'secc3Riesgo': 'false'}]}, (err, borradas) => {
+   Encuesta.deleteMany({'$and': [{'secc2Riesgo': 'false'}, {'secc3Riesgo': 'false'}, {'fiebre': null}]}, (err, borradas) => {
       if (err) {
          return res.status(500).json({
             ok: false,
@@ -141,7 +141,7 @@ app.delete('/', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, 
          return res.status(400).json({
             ok: false,
             mensaje: 'No existen encuestas con esas características',
-            errors: { message: 'No se encontraron encuestas con ambos parámetros' }
+            errors: { message: 'No se encontraron encuestas con esas coincidencias' }
          });
       }
 
