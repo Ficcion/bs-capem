@@ -5,13 +5,13 @@ var Schema = mongoose.Schema;
 var encuestaSchema = new Schema({
   codigo: {
     type: String,
-    required: [true, 'El código es oblicatorio'] },
-  numEmp: {
+    required: [true, 'El código es oblicatorio.'] },
+  numeroEmpleado: {
     type: String,
-    required: [true, 'El número de empleado es oblicatorio'] },
+    required: [true, 'El número de empleado es oblicatorio.'] },
   fecha: {
     type: String,
-    required: [true, 'La fecha es obligatoria'] },
+    required: [true, 'La fecha es obligatoria.'] },
   fiebre: {
     type: String,
     required: false },
@@ -27,31 +27,31 @@ var encuestaSchema = new Schema({
   calosfrios: {
     type: String,
     required: false },
-  dlrCabeza: {
+  dolorCabeza: {
     type: String,
     required: false },
-  dlrAbdominal: {
+  dolorAbdominal: {
     type: String,
     required: false },
-  dlrMuscular: {
+  dolorMuscular: {
     type: String,
     required: false },
-  dlrArticulaciones: {
+  dolorArticulaciones: {
     type: String,
     required: false },
-  debilidadMal: {
+  debilidadMalestar: {
     type: String,
     required: false, },
-  secrNasal: {
+  secrecionNasal: {
     type: String,
     required: false },
-  dlrGarganta: {
+  dolorGarganta: {
     type: String,
     required: false },
   conjuntivitis: {
     type: String,
     required: false },
-  sintomas2: {
+  sintomasComplicacion: {
     type: String,
     required: false },
   diabetes: {
@@ -60,13 +60,13 @@ var encuestaSchema = new Schema({
   presion: {
     type: String,
     required: false },
-  enfCorazon: {
+  enfermedadCorazon: {
     type: String,
     required: false },
-  enfRenal: {
+  enfermedadRenal: {
     type: String,
     required: false },
-  enfPulmonares: {
+  enfermedadPulmonar: {
     type: String,
     required: false },
   cancer: {
@@ -81,10 +81,10 @@ var encuestaSchema = new Schema({
   ninguna: {
     type: String,
     required: false },
-  secc2Riesgo: {
+  sospechosoComplicacion: {
     type: String,
     required: false },
-  secc3Riesgo: {
+  sospechosoRiesgo: {
     type: String,
     required: false },
 }, { collection: 'encuestas' });

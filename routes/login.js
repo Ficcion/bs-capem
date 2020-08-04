@@ -21,7 +21,7 @@ app.post('/', (req, res) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
-                mensaje: 'Error al buscar empresa',
+                mensaje: 'Error al buscar empresa.',
                 errors: err
             });
         }
@@ -30,7 +30,7 @@ app.post('/', (req, res) => {
         if (!usuarioDB) {
             return res.status(400).json({
                 ok: false,
-                mensaje: 'Credenciales incorrectas',
+                mensaje: 'Credenciales incorrectas.',
                 errors: err
             });
         }
@@ -39,7 +39,7 @@ app.post('/', (req, res) => {
         if (!bcrypt.compareSync(body.password, usuarioDB.password)) {
             return res.status(400).json({
                 ok: false,
-                mensaje: 'Credenciales incorrectas',
+                mensaje: 'Credenciales incorrectas.',
                 errors: err
             });
         }

@@ -25,7 +25,7 @@ app.get('/', mdAutenticar.verificaToken, (req, res) => {
          if ( err ) {
             return res.status(500).json({
                ok: false,
-               mensaje: 'Error al cargar encuestas',
+               mensaje: 'Error al cargar encuestas.',
                errors: err
             });
          }
@@ -52,7 +52,7 @@ app.get('/', mdAutenticar.verificaToken, (req, res) => {
          if ( err ) {
             return res.status(500).json({
                ok: false,
-               mensaje: 'Error al cargar encuestas',
+               mensaje: 'Error al cargar encuestas.',
                errors: err
             });
          }
@@ -79,33 +79,33 @@ app.post('/', (req, res) => {
 
    var encuesta = new Encuesta({
       codigo: body.codigo,
-      numEmp: body.numEmp,
+      numeroEmpleado: body.numeroEmpleado,
       fecha: body.fecha,
       fiebre: body.fiebre,
       tos: body.tos,
       diarrea: body.diarrea,
       vomito: body.vomito,
       calosfrios: body.calosfrios,
-      dlrCabeza: body.dlrCabeza,
-      dlrAbdominal: body.dlrAbdominal,
-      dlrMuscular: body.dlrMuscular,
-      dlrArticulaciones: body.dlrArticulaciones,
-      debilidadMal: body.debilidadMal,
-      secrNasal: body.secrNasal,
-      dlrGarganta: body.dlrGarganta,
+      dolorCabeza: body.dolorCabeza,
+      dolorAbdominal: body.dolorAbdominal,
+      dolorMuscular: body.dolorMuscular,
+      dolorArticulaciones: body.dolorArticulaciones,
+      debilidadMalestar: body.debilidadMalestar,
+      secrecionNasal: body.secrecionNasal,
+      dolorGarganta: body.dolorGarganta,
       conjuntivitis: body.conjuntivitis,
-      sintomas2: body.sintomas2,
+      sintomasComplicacion: body.sintomasComplicacion,
       diabetes: body.diabetes,
       presion: body.presion,
-      enfCorazon: body.enfCorazon,
-      enfRenal: body.enfRenal,
-      enfPulmonares: body.enfPulmonares,
+      enfermedadCorazon: body.enfermedadCorazon,
+      enfermedadRenal: body.enfermedadRenal,
+      enfermedadPulmonar: body.enfermedadPulmonar,
       cancer: body.cancer,
       inmunocompromiso: body.inmunocompromiso,
       vih: body.vih,
       ninguna: body.ninguna,
-      secc2Riesgo: body.secc2Riesgo,
-      secc3Riesgo: body.secc3Riesgo,
+      sospechosoComplicacion: body.sospechosoComplicacion,
+      sospechosoRiesgo: body.sospechosoRiesgo,
    });
 
    encuesta.save( (err, ecuestaGuardada) => {
@@ -113,7 +113,7 @@ app.post('/', (req, res) => {
       if (err) {
          return res.status(400).json({
             ok: false,
-            mensaje: 'Error al crear encuesta',
+            mensaje: 'Error al crear encuesta.',
             errors: err
          });
       }
@@ -128,11 +128,11 @@ app.post('/', (req, res) => {
 /* ELIMINAR ENCUESTAS SI NO SON DE RIESGO -función de administrador- */
 app.delete('/', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, res)  => {
 
-   Encuesta.deleteMany({'$and': [{'secc2Riesgo': 'false'}, {'secc3Riesgo': 'false'}, {'fiebre': null}]}, (err, borradas) => {
+   Encuesta.deleteMany({'$and': [{'sospechosoComplicacion': 'false'}, {'sospechosoRiesgo': 'false'}, {'fiebre': null}]}, (err, borradas) => {
       if (err) {
          return res.status(500).json({
             ok: false,
-            mensaje: 'Error al borrar encuestas',
+            mensaje: 'Error al borrar encuestas.',
             errors: err
          });
       }
@@ -140,8 +140,8 @@ app.delete('/', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, 
       if ( !borradas ) {
          return res.status(400).json({
             ok: false,
-            mensaje: 'No existen encuestas con esas características',
-            errors: { message: 'No se encontraron encuestas con esas coincidencias' }
+            mensaje: 'No existen encuestas con esas características.',
+            errors: { message: 'No se encontraron encuestas con esas coincidencias.' }
          });
       }
 

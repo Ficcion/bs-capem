@@ -38,8 +38,8 @@ exports.verificaAdmin = function(req, res, next) {
 
       return res.status(401).json({
          ok: false,
-         mensaje: 'Token incorrecto',
-         errors: { message: 'No tiene permisos para ejecutar esta acción'}
+         mensaje: 'Token incorrecto.',
+         errors: { message: 'No tiene permisos para ejecutar esta acción.'}
       });
    }
 };

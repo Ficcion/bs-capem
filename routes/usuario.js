@@ -20,7 +20,7 @@ app.get('/', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, res
       if ( err ) {
          return res.status(500).json({
             ok: false,
-            mensaje: 'Error al cargar usuarios',
+            mensaje: 'Error al cargar usuarios.',
             errors: err
          });
       }
@@ -49,7 +49,7 @@ app.get('/:empresa', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (
          if (err) {
             return res.status(500).json({
                ok: false,
-               mensaje: 'Error al buscar usuario',
+               mensaje: 'Error al buscar usuario.',
                errors: err
             });
          }
@@ -57,8 +57,8 @@ app.get('/:empresa', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (
          if (!usuario) {
             return res.status(400).json({
                ok: false,
-               mensaje: 'El usuario ' + empresa + ' no existe',
-               errors: { message: 'No existe una empresa con ese usuario'}
+               mensaje: 'El usuario ' + empresa + ' no existe.',
+               errors: { message: 'No existe una empresa con ese usuario.'}
             });
          }
 
@@ -88,7 +88,7 @@ app.post('/', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, re
       if (err) {
          return res.status(400).json({
             ok: false,
-            mensaje: 'Error al crear usuario',
+            mensaje: 'Error al crear usuario.',
             errors: err.message
          });
       }
@@ -111,7 +111,7 @@ app.put('/:id', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, 
       if (err) {
          return res.status(500).json({
             ok: false,
-            mensaje: 'Error al buscar usuario',
+            mensaje: 'Error al buscar usuario.',
             errors: err
          });
       }
@@ -119,7 +119,7 @@ app.put('/:id', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, 
       if ( !usuario ) {
          return res.status(400).json({
             ok: false,
-            mensaje: 'El id: ' + id + ' no corresponde a ningún usuario',
+            mensaje: 'El id: ' + id + ' no corresponde a ningún usuario.',
             errors: err
          });
       }
@@ -135,7 +135,7 @@ app.put('/:id', [mdAutenticar.verificaToken, mdAutenticar.verificaAdmin], (req, 
          if (err) {
             return res.status(400).json({
                ok: false,
-               mensaje: 'Error al actualizar usuario',
+               mensaje: 'Error al actualizar usuario.',
                errors: err
             });
          }
