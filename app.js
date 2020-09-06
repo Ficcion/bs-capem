@@ -7,13 +7,14 @@ var mongoose = require('mongoose');
 var app = express();
 var puerto = process.env.PORT;
 var APP_R = process.env.APP_R;
+var APP_K = process.env.APP_K;
 
 // Middleware CORS
 app.use(cors(opciones));
 
 var opciones = {
     origin: (origin, callback) => {
-        if (APP_R.indexOf(origin) !== -1) {
+        if (APP_R.indexOf(origin) !== -1 || APP_K.indexOf(origin) !== -1) {
             callback(null, true);
 
         } else {
